@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	$(document).ready(
+			function() {
+				$(".previewBtn").click(
+						function() {
+							console.log("========");
+							var curWwwPath = window.document.location.href;
+							var pathName = window.document.location.pathname;
+							var pos = curWwwPath.indexOf(pathName);
+							console.log("========111");
+							var localhostPath = curWwwPath.substring(0, pos);
+							console.log(localhostPath);
+							window.open(localhostPath
+									+ "/pdfjs/web/viewer.html?file=/preview?fileName=%3Dtest.pdf");
+
+						});
+			})
+</script>
+</head>
+<body>
+	<div class="previewBtn">预览</div>
+</body>
+</html>

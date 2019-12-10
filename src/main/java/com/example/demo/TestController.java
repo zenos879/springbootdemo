@@ -10,4 +10,9 @@ public class TestController {
 	public String hello() {
 		return "hello";
 	}
+
+	@RequestMapping("/pdfView")
+	public String hello2() {
+		return "pdfTest";
+	}
 }
