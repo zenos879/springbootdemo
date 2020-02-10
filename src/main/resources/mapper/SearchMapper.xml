@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.SearchDao">
+	<select id="selectTopCate"
+		resultType="com.example.demo.pojo.CategoryInfo">
+		select * from category_info where
+		upper_cat_id=0
+	</select>
+	<select id="selectLowerCat"
+		resultType="com.example.demo.pojo.CategoryInfo">
+		select * from category_info where level_no=2
+		and
+		upper_cat_id=#{upperCatId}
+	</select>
+	<select id="selectArticleList" resultType="HashMap">
+		select
+		b.art_id,b.title,b.art_no,b.file_path from
+		abstract_info
+		a,article_info
+		b where a.art_id=b.art_id and
+		a.cat_id=#{catId} limit #{start},#{count}
+	</select>
+	<select id="selectArticleCnt" resultType="int">
+		select count(1) from
+		abstract_info a,article_info b where
+		a.art_id=b.art_id and
+		a.cat_id=#{catId}
+	</select>
+	<select id="findArticleViewTimes" resultType="HashMap">
+		select
+		a.art_id,b.view_times from abstract_info
+		a,article_operations b
+		where a.art_id=b.art_id and
+		a.art_id in
+		<foreach collection="list" item="id" index="index" open="("
+			close=")" separator=",">
+			#{id}
+		</foreach>
+
+	</select>
+	<select id="getArticleTitle" resultType="HashMap">
+		select
+		art_id,title,art_no,file_path from article_info where art_id
+		in
+		<foreach collection="list" item="id" index="index" open="("
+			close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+	<select id="getArticleInfo" resultType="HashMap">
+		select
+		title,art_no,publish_date,impl_date,file_path from
+		article_info where
+		art_id=#{artId}
+	</select>
+	<select id="findUpdateList" resultType="HashMap">
+		select
+		art_id,title,art_no,publish_date,file_path from
+		article_info where
+		publish_date >#{publishDate} order by publish_date
+		desc limit
+		#{start},#{count}
+	</select>
+	<select id="findUpdateListCount" resultType="int">
+		select count(1) from
+		article_info where publish_date > #{updateDate}
+	</select>
+	<select id="getTotalAriticles" resultType="int">
+		select count(1) from
+		article_info
+	</select>
+	<select id="findCatIdByCatName" resultType="int">
+		select cat_id from
+		category_info where cat_name='热门标签'
+	</select>
+	<select id="findArticleTitleCount" resultType="int">
+		select count(1)
+		from article_info where title like "%" #{keywords} "%" or art_no like
+		"%" #{keywords}"%" </select>
+	<select id="searchArticleTitle" resultType="HashMap">
+		select
+		art_id,title,art_no,file_path from article_info
+		where title like "%"
+		#{keywords}"%" or art_no like "%" #{keywords}"%"
+		order by publish_date
+		desc
+		limit #{start},#{count}
+	</select>
+
+</mapper> 
