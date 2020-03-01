@@ -10,7 +10,7 @@
 		resultType="com.example.demo.pojo.CategoryInfo">
 		select * from category_info where level_no=2
 		and
-		upper_cat_id=#{upperCatId}
+		upper_cat_id=#{upperCatId} order by create_time desc
 	</select>
 	<select id="selectArticleList" resultType="HashMap">
 		select
