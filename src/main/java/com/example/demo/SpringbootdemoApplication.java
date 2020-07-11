@@ -13,7 +13,7 @@ public class SpringbootdemoApplication extends SpringBootServletInitializer {
 		SpringApplication.run(SpringbootdemoApplication.class, args);
 	}
 
-	// 继承SpringBootServletInitializer 实现configure 方便打war 外部服务器部署。
+	// 继承SpringBoot1ServletInitializer 实现configure 方便打war 外部服务器部署。
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(SpringbootdemoApplication.class);
