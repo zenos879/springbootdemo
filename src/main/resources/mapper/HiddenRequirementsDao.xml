@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.HiddenRequirementsDao">
+    <resultMap id="BaseResultMap" type="com.example.demo.pojo.HiddenRequirements">
+        <id column="auto_id" jdbcType="INTEGER" property="autoId"/>
+        <result column="req_id" jdbcType="INTEGER" property="reqId"/>
+        <result column="requirements" jdbcType="VARCHAR" property="requirements"/>
+        <result column="cat_id" jdbcType="INTEGER" property="catId"/>
+        <result column="keywords" jdbcType="VARCHAR" property="keywords"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="hidden_danger" jdbcType="VARCHAR" property="hiddenDanger"/>
+        <result column="pic" jdbcType="VARCHAR" property="pic"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="industry" jdbcType="VARCHAR" property="industry"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    auto_id, req_id, requirements, cat_id, keywords, `source`, hidden_danger, pic, area, 
+    industry, create_time
+  </sql>
+    <select id="selectByPrimaryKey"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hidden_requirements
+        where req_id in
+        <foreach collection="array" item="reqId"  open="(" separator="," close=")">
+            #{reqId}
+        </foreach>
+
+    </select>
+
+    <select id="getRequirementByCatid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hidden_requirements
+        where cat_id in
+        <foreach collection="array" item="catId" index="index" open="(" close=")" separator=",">
+            #{catId}
+        </foreach>
+    </select>
+    <select id="getRequirementsByKeywords" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hidden_requirements
+        <where>
+            <if test="keywords != null">
+                keywords like concat('%',#{keywords},'%')
+            </if>
+            <if test="catIds != null">
+                and cat_id in
+                <foreach collection="catIds" item="catId" index="index" open="(" close=")" separator=",">
+                    #{catId}
+                </foreach>
+            </if>
+        </where>
+        order by create_time
+        desc
+        limit #{start},#{count}
+    </select>
+    <select id="getRequirementsCountByKeywords" resultType="java.lang.Integer">
+        select
+        count(1)
+        from hidden_requirements
+        <where>
+            <if test="keywords != null">
+                keywords like concat('%',#{keywords},'%')
+            </if>
+            <if test="catIds != null">
+                and cat_id in
+                <foreach collection="catIds" item="catId" index="index" open="(" close=")" separator=",">
+                    #{catId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hidden_requirements
+    where auto_id = #{autoId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="auto_id" keyProperty="autoId"
+            parameterType="com.example.demo.pojo.HiddenRequirements" useGeneratedKeys="true">
+    insert into hidden_requirements (req_id, requirements, cat_id, 
+      keywords, `source`, hidden_danger, 
+      pic, area, industry, 
+      create_time)
+    values (#{reqId,jdbcType=INTEGER}, #{requirements,jdbcType=VARCHAR}, #{catId,jdbcType=INTEGER}, 
+      #{keywords,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{hiddenDanger,jdbcType=VARCHAR}, 
+      #{pic,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyColumn="auto_id" keyProperty="autoId"
+            parameterType="com.example.demo.pojo.HiddenRequirements" useGeneratedKeys="true">
+        insert into hidden_requirements
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reqId != null">
+                req_id,
+            </if>
+            <if test="requirements != null">
+                requirements,
+            </if>
+            <if test="catId != null">
+                cat_id,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="source != null">
+                `source`,
+            </if>
+            <if test="hiddenDanger != null">
+                hidden_danger,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="industry != null">
+                industry,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reqId != null">
+                #{reqId,jdbcType=INTEGER},
+            </if>
+            <if test="requirements != null">
+                #{requirements,jdbcType=VARCHAR},
+            </if>
+            <if test="catId != null">
+                #{catId,jdbcType=INTEGER},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="hiddenDanger != null">
+                #{hiddenDanger,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="industry != null">
+                #{industry,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.HiddenRequirements">
+        update hidden_requirements
+        <set>
+            <if test="reqId != null">
+                req_id = #{reqId,jdbcType=INTEGER},
+            </if>
+            <if test="requirements != null">
+                requirements = #{requirements,jdbcType=VARCHAR},
+            </if>
+            <if test="catId != null">
+                cat_id = #{catId,jdbcType=INTEGER},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                `source` = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="hiddenDanger != null">
+                hidden_danger = #{hiddenDanger,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="industry != null">
+                industry = #{industry,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where auto_id = #{autoId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.HiddenRequirements">
+    update hidden_requirements
+    set req_id = #{reqId,jdbcType=INTEGER},
+      requirements = #{requirements,jdbcType=VARCHAR},
+      cat_id = #{catId,jdbcType=INTEGER},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=VARCHAR},
+      hidden_danger = #{hiddenDanger,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where auto_id = #{autoId,jdbcType=INTEGER}
+  </update>
+</mapper>

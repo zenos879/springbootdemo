@@ -4,13 +4,13 @@
 	<select id="selectTopCate"
 		resultType="com.example.demo.pojo.CategoryInfo">
 		select * from category_info where
-		upper_cat_id=0
+		level_no=1 order by order_no asc,create_time desc
 	</select>
 	<select id="selectLowerCat"
 		resultType="com.example.demo.pojo.CategoryInfo">
 		select * from category_info where level_no=2
 		and
-		upper_cat_id=#{upperCatId} order by create_time desc
+		upper_cat_id=#{upperCatId} order by order_no asc,create_time desc
 	</select>
 	<select id="selectArticleList" resultType="HashMap">
 		select

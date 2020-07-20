@@ -11,6 +11,7 @@ public class CategoryInfo {
 	private String catName;
 	private Date createTime;
 	private Integer levelNo;
+	private Integer orderNo;
 	private Integer upperCatId;
 
 	public Integer getCatId() {
@@ -62,7 +63,16 @@ public class CategoryInfo {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		json.put("createTime", sdf.format(this.getCreateTime()));
 		json.put("upperCatId", this.getUpperCatId());
+		json.put("orderNo", this.getOrderNo());
 
 		return json.toString();
+	}
+
+	public Integer getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(Integer orderNo) {
+		this.orderNo = orderNo;
 	}
 }

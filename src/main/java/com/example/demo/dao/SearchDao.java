@@ -7,12 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.pojo.CategoryInfo;
-import com.example.demo.pojo.User;
 
 @Mapper
 @Repository
 public interface SearchDao {
-	List<User> selectUserByUsername(String username);
 
 	List<CategoryInfo> selectTopCate();
 

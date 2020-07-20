@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserOperationsDao">
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.UserOperations">
+    <id column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="collections" jdbcType="VARCHAR" property="collections" />
+    <result column="h_collections" jdbcType="VARCHAR" property="hCollections" />
+    <result column="h_agree" jdbcType="VARCHAR" property="hAgree" />
+    <result column="histories" jdbcType="VARCHAR" property="histories" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="vip_left_day" jdbcType="INTEGER" property="vipLeftDay" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    open_id, collections, h_collections, h_agree, histories, update_time, create_time, 
+    vip_left_day
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_operations
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+    <select id="selectIfExistUserOperations" resultType="java.lang.Integer">
+	select count(1) from user_operations where
+		open_id=#{openId}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_operations
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="open_id" keyProperty="openId" parameterType="com.example.demo.pojo.UserOperations" useGeneratedKeys="true">
+    insert into user_operations (collections, h_collections, h_agree, 
+      histories, update_time, create_time, 
+      vip_left_day)
+    values (#{collections,jdbcType=VARCHAR}, #{hCollections,jdbcType=VARCHAR}, #{hAgree,jdbcType=VARCHAR}, 
+      #{histories,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{vipLeftDay,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="open_id" keyProperty="openId" parameterType="com.example.demo.pojo.UserOperations" useGeneratedKeys="true">
+    insert into user_operations
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collections != null">
+        collections,
+      </if>
+      <if test="hCollections != null">
+        h_collections,
+      </if>
+      <if test="hAgree != null">
+        h_agree,
+      </if>
+      <if test="histories != null">
+        histories,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="vipLeftDay != null">
+        vip_left_day,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collections != null">
+        #{collections,jdbcType=VARCHAR},
+      </if>
+      <if test="hCollections != null">
+        #{hCollections,jdbcType=VARCHAR},
+      </if>
+      <if test="hAgree != null">
+        #{hAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="histories != null">
+        #{histories,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipLeftDay != null">
+        #{vipLeftDay,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.UserOperations">
+    update user_operations
+    <set>
+      <if test="collections != null">
+        collections = #{collections,jdbcType=VARCHAR},
+      </if>
+      <if test="hCollections != null">
+        h_collections = #{hCollections,jdbcType=VARCHAR},
+      </if>
+      <if test="hAgree != null">
+        h_agree = #{hAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="histories != null">
+        histories = #{histories,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipLeftDay != null">
+        vip_left_day = #{vipLeftDay,jdbcType=INTEGER},
+      </if>
+    </set>
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.UserOperations">
+    update user_operations
+    set collections = #{collections,jdbcType=VARCHAR},
+      h_collections = #{hCollections,jdbcType=VARCHAR},
+      h_agree = #{hAgree,jdbcType=VARCHAR},
+      histories = #{histories,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      vip_left_day = #{vipLeftDay,jdbcType=INTEGER}
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+</mapper>
