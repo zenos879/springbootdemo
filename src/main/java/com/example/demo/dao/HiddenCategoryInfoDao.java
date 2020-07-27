@@ -9,17 +9,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface HiddenCategoryInfoDao {
-    int deleteByPrimaryKey(Integer autoId);
-
-    int insert(HiddenCategoryInfo record);
-
-    int insertSelective(HiddenCategoryInfo record);
 
     HiddenCategoryInfo selectByPrimaryKey(Integer autoId);
-
-    int updateByPrimaryKeySelective(HiddenCategoryInfo record);
-
-    int updateByPrimaryKey(HiddenCategoryInfo record);
 
     List<HiddenCategoryInfo> selectTopCate();
 

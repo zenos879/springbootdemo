@@ -32,7 +32,7 @@ public interface SearchDao {
 
 	int getTotalAriticles();
 
-	List<Object> findCatIdByCatName();
+	List<Object> findCatIdByCatName(String catName);
 
 	int findArticleTitleCount(String keywords);
 

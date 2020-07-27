@@ -8,10 +8,6 @@ import java.util.Date;
  * @author 
  */
 public class HiddenCategoryInfo implements Serializable {
-    /**
-     * 自增主键
-     */
-    private Integer autoId;
 
     /**
      * 隐患排查—分类ID
@@ -39,14 +35,6 @@ public class HiddenCategoryInfo implements Serializable {
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
-
-    public Integer getAutoId() {
-        return autoId;
-    }
-
-    public void setAutoId(Integer autoId) {
-        this.autoId = autoId;
-    }
 
     public Integer getCatId() {
         return catId;
@@ -100,8 +88,7 @@ public class HiddenCategoryInfo implements Serializable {
             return false;
         }
         HiddenCategoryInfo other = (HiddenCategoryInfo) that;
-        return (this.getAutoId() == null ? other.getAutoId() == null : this.getAutoId().equals(other.getAutoId()))
-            && (this.getCatId() == null ? other.getCatId() == null : this.getCatId().equals(other.getCatId()))
+        return (this.getCatId() == null ? other.getCatId() == null : this.getCatId().equals(other.getCatId()))
             && (this.getCatName() == null ? other.getCatName() == null : this.getCatName().equals(other.getCatName()))
             && (this.getLevelNo() == null ? other.getLevelNo() == null : this.getLevelNo().equals(other.getLevelNo()))
             && (this.getOrderNo() == null ? other.getOrderNo() == null : this.getOrderNo().equals(other.getOrderNo()))
@@ -113,7 +100,6 @@ public class HiddenCategoryInfo implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getAutoId() == null) ? 0 : getAutoId().hashCode());
         result = prime * result + ((getCatId() == null) ? 0 : getCatId().hashCode());
         result = prime * result + ((getCatName() == null) ? 0 : getCatName().hashCode());
         result = prime * result + ((getLevelNo() == null) ? 0 : getLevelNo().hashCode());
@@ -129,7 +115,6 @@ public class HiddenCategoryInfo implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", autoId=").append(autoId);
         sb.append(", catId=").append(catId);
         sb.append(", catName=").append(catName);
         sb.append(", levelNo=").append(levelNo);

@@ -24,6 +24,9 @@ public class UserController {
     @RequestMapping(value = "userInfo")
     public List<UserInfo> selectNicknameByOpenid() {
         String openId = request.getParameter("openId");
+        if (openId == null || "".equals(openId)) {
+            return null;
+        }
         List<UserInfo> users = userService.selectNicknameByOpenid(openId);
         return users;
     }
@@ -33,6 +36,9 @@ public class UserController {
         String openId = request.getParameter("openId");
         String nickName = request.getParameter("nickName");
         String avatarUrl = request.getParameter("avatarUrl");
+        if (openId == null || "".equals(openId)) {
+            return "";
+        }
         UserInfo user = new UserInfo();
         user.setAvatarUrl(avatarUrl);
         user.setOpenId(openId);
@@ -44,7 +50,9 @@ public class UserController {
     @RequestMapping(value = "getVipperiod")
     public String getVipperiod() {
         String openId = request.getParameter("openId");
-        System.out.print(openId);
+        if (openId == null || "".equals(openId)) {
+            return "";
+        }
         String ret = userService.getVipperiod(openId);
         return ret;
     }
@@ -52,7 +60,9 @@ public class UserController {
     @RequestMapping(value = "updateVipperiod")
     public String updateVipperiod() {
         String openId = request.getParameter("openId");
-        System.out.print(openId);
+        if (openId == null || "".equals(openId)) {
+            return "";
+        }
         String ret = userService.updateVipperiod(openId);
         return ret;
     }
@@ -69,6 +79,9 @@ public class UserController {
     public String saveCollections() {
         String openId = request.getParameter("openId");
         String collections = request.getParameter("collections");
+        if (openId == null || "".equals(openId)) {
+            return "";
+        }
         collections = "[" + collections + "]";
         String ret = userService.saveCollections(openId, collections);
         return ret;
@@ -78,6 +91,9 @@ public class UserController {
     public String saveHCollections() {
         String openId = request.getParameter("openId");
         String collections = request.getParameter("HCollections");
+        if (openId == null || "".equals(openId)) {
+            return "";
+        }
         collections = "[" + collections + "]";
         String ret = userService.saveHCollections(openId, collections);
         return ret;
@@ -87,6 +103,9 @@ public class UserController {
     public String saveHAgree() {
         String openId = request.getParameter("openId");
         String HAgree = request.getParameter("HAgree");
+        if (openId == null || "".equals(openId)) {
+            return "";
+        }
         HAgree = "[" + HAgree + "]";
         String ret = userService.saveHAgree(openId, HAgree);
         return ret;

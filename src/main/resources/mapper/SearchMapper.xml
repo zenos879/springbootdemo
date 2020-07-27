@@ -71,7 +71,7 @@
 	</select>
 	<select id="findCatIdByCatName" resultType="int">
 		select cat_id from
-		category_info where cat_name='热门标签'
+		category_info where cat_name like "%" #{catName} "%"
 	</select>
 	<select id="findArticleTitleCount" resultType="int">
 		select count(1)

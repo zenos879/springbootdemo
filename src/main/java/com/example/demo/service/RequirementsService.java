@@ -126,7 +126,6 @@ public class RequirementsService {
                 }
                 upperCat.put("children", lowerCatArr);
                 allCatArr.add(upperCat);
-
             }
         }
         return allCatArr.toString();

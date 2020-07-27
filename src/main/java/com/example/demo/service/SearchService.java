@@ -214,7 +214,7 @@ public class SearchService {
     public String getHotTag() {
         JSONArray arr = new JSONArray();
         int catIdStr = 0;
-        List<Object> catIdList = searchDao.findCatIdByCatName();
+        List<Object> catIdList = searchDao.findCatIdByCatName("热门");
         if (catIdList != null && catIdList.size() > 0) {
             Object obj = catIdList.get(0);
             catIdStr = Integer.parseInt(obj.toString().toString());

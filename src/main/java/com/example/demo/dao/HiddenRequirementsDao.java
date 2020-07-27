@@ -10,17 +10,8 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface HiddenRequirementsDao {
-    int deleteByPrimaryKey(Integer autoId);
-
-    int insert(HiddenRequirements record);
-
-    int insertSelective(HiddenRequirements record);
 
     List<HiddenRequirements> selectByPrimaryKey(String[] reqIds);
-
-    int updateByPrimaryKeySelective(HiddenRequirements record);
-
-    int updateByPrimaryKey(HiddenRequirements record);
 
     List<HiddenRequirements> getRequirementByCatid(String[] catIds);
 

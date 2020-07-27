@@ -8,10 +8,6 @@ import java.util.Date;
  * @author 
  */
 public class HiddenRequirements implements Serializable {
-    /**
-     * 自增主键
-     */
-    private Integer autoId;
 
     /**
      * 安全要求的id
@@ -64,14 +60,6 @@ public class HiddenRequirements implements Serializable {
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
-
-    public Integer getAutoId() {
-        return autoId;
-    }
-
-    public void setAutoId(Integer autoId) {
-        this.autoId = autoId;
-    }
 
     public Integer getReqId() {
         return reqId;
@@ -165,8 +153,7 @@ public class HiddenRequirements implements Serializable {
             return false;
         }
         HiddenRequirements other = (HiddenRequirements) that;
-        return (this.getAutoId() == null ? other.getAutoId() == null : this.getAutoId().equals(other.getAutoId()))
-            && (this.getReqId() == null ? other.getReqId() == null : this.getReqId().equals(other.getReqId()))
+        return  (this.getReqId() == null ? other.getReqId() == null : this.getReqId().equals(other.getReqId()))
             && (this.getRequirements() == null ? other.getRequirements() == null : this.getRequirements().equals(other.getRequirements()))
             && (this.getCatId() == null ? other.getCatId() == null : this.getCatId().equals(other.getCatId()))
             && (this.getKeywords() == null ? other.getKeywords() == null : this.getKeywords().equals(other.getKeywords()))
@@ -182,7 +169,6 @@ public class HiddenRequirements implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getAutoId() == null) ? 0 : getAutoId().hashCode());
         result = prime * result + ((getReqId() == null) ? 0 : getReqId().hashCode());
         result = prime * result + ((getRequirements() == null) ? 0 : getRequirements().hashCode());
         result = prime * result + ((getCatId() == null) ? 0 : getCatId().hashCode());
@@ -202,7 +188,6 @@ public class HiddenRequirements implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", autoId=").append(autoId);
         sb.append(", reqId=").append(reqId);
         sb.append(", requirements=").append(requirements);
         sb.append(", catId=").append(catId);
